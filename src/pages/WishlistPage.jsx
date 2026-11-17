@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import "./WishlistPage.css";
 
 export default function WishlistPage() {
   const { wishlist, toggleWishlist, moveWishlistToBag, moveAllWishlistToBag, showToast } = useApp();
@@ -97,12 +98,10 @@ export default function WishlistPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
-            {filteredItems.map((item) => (
+<div className="wishlist-grid grid grid-cols-2 gap-3 pt-6 sm:grid-cols-2 sm:gap-5 sm:pt-8 lg:grid-cols-4 lg:gap-6">            {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className="group flex flex-col overflow-hidden rounded-xl border border-line bg-white shadow-ambient transition duration-300 hover:shadow-lift"
-              >
+className="wishlist-card group flex min-w-0 flex-col overflow-hidden rounded-xl border border-line bg-white shadow-ambient transition duration-300 hover:shadow-lift"              >
                 <div className="relative aspect-[3/4] overflow-hidden bg-cream">
                   <img
                     src={item.image}

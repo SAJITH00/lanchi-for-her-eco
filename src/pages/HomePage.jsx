@@ -605,11 +605,10 @@ export default function HomePage() {
                 key={pill}
                 type="button"
                 onClick={() => setSelectedFilter(pill)}
-                className={`filter-pill shrink-0 rounded-full px-5 py-2 text-[11px] font-semibold uppercase transition ${
-                  selectedFilter === pill
+                className={`filter-pill shrink-0 rounded-full px-5 py-2 text-[11px] font-semibold uppercase transition ${selectedFilter === pill
                     ? 'bg-primary text-white shadow-sm'
                     : 'border border-line bg-white text-umber hover:border-primary hover:text-primary'
-                }`}
+                  }`}
               >
                 {pill}
               </button>
@@ -618,8 +617,8 @@ export default function HomePage() {
 
           {/* PRODUCTS */}
 
-          <ul className="product-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {filteredProducts.map(product => {
+<ul className="product-grid grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6">      
+        {filteredProducts.map(product => {
               const inWish = isInWishlist(product.id);
 
               return (
@@ -643,9 +642,8 @@ export default function HomePage() {
                       type="button"
                       onClick={() => toggleWishlist(product)}
                       aria-label={`Wishlist ${product.name}`}
-                      className={`wishlist-button absolute right-3 top-3 flex size-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur-sm ${
-                        inWish ? 'text-primary' : 'text-ink'
-                      }`}
+                      className={`wishlist-button absolute right-3 top-3 flex size-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur-sm ${inWish ? 'text-primary' : 'text-ink'
+                        }`}
                     >
                       <span className="material-symbols-outlined text-[19px]">
                         {inWish ? 'favorite' : 'favorite_border'}

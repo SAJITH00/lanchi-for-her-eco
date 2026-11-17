@@ -1,0 +1,69 @@
+/* =========================================
+   WISHLIST - MOBILE RESPONSIVE GRID
+========================================= */
+
+@media (max-width: 640px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .wishlist-card {
+    min-width: 0;
+    border-radius: 9px;
+  }
+
+  .wishlist-card .p-4 {
+    padding: 10px;
+  }
+
+  .wishlist-card h3 {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .wishlist-card .text-sm {
+    font-size: 12px;
+  }
+
+  .wishlist-card button {
+    font-size: 10px;
+  }
+
+  .wishlist-card .aspect-\[3\/4\] {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* =========================================
+   WISHLIST - MOBILE RESPONSIVE GRID
+========================================= */
+
+@media (max-width: 640px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .wishlist-card {
+    min-width: 0;
+    border-radius: 9px;
+  }
+
+  .wishlist-card .p-4 {
+    padding: 10px;
+  }
+
+  .wishlist-card h3 {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .wishlist-card .text-sm {
+    font-size: 12px;
+  }
+
+  .wishlist-card button {
+    font-size: 10px;
+  }
+}

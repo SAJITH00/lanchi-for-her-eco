@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useApp } from '../context/AppContext';
+import "./CategoryPage.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -330,10 +331,10 @@ export default function CategoryPage() {
             </button>
           </div>
         ) : (
-          <div
-            ref={gridRef}
-            className="grid grid-cols-1 gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          >
+       <div
+  ref={gridRef}
+  className="category-product-grid grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-9 lg:grid-cols-3 xl:grid-cols-4"
+>
             {filteredList.map((product) => {
               const inWish = isInWishlist(product.id);
 

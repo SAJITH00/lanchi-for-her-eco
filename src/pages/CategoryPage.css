@@ -1,0 +1,35 @@
+/* Mobile product grid */
+@media (max-width: 640px) {
+  .category-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 12px;
+    row-gap: 22px;
+  }
+
+  .category-product-card {
+    min-width: 0;
+    border-radius: 12px;
+  }
+
+  .category-product-card .p-4 {
+    padding: 10px;
+  }
+
+  .category-product-card h3 {
+    font-size: 12px;
+    line-height: 1.5;
+    min-height: 36px;
+  }
+
+  .category-product-card .category-product-image {
+    aspect-ratio: 3 / 4;
+  }
+
+  .category-product-card button {
+    font-size: 9px;
+  }
+
+  .category-product-card .category-quick-view {
+    display: none;
+  }
+}

@@ -506,3 +506,57 @@
     animation-duration: 0.01ms !important;
   }
 }
+/* =========================================
+   MOBILE PRODUCT GRID - 2 PRODUCTS PER ROW
+========================================= */
+
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .product-card {
+    min-width: 0;
+    border-radius: 9px;
+  }
+
+  .product-image {
+    aspect-ratio: 3 / 4;
+  }
+
+  .product-card .p-5 {
+    padding: 10px;
+  }
+
+  .product-card h3 {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .product-card .text-xs {
+    font-size: 10px;
+  }
+
+  .product-card .add-cart-button {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .product-card .wishlist-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .product-card .product-image .absolute.left-3 {
+    left: 6px;
+    top: 6px;
+    font-size: 9px;
+    padding: 4px 6px;
+  }
+
+  .product-card .product-image .absolute.right-3 {
+    right: 6px;
+    top: 6px;
+  }
+}
