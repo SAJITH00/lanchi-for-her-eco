@@ -129,9 +129,9 @@ className="wishlist-card group flex min-w-0 flex-col overflow-hidden rounded-xl 
                     <span className="text-[10px] font-semibold uppercase text-muted tracking-micro">{item.fabric}</span>
                     <h3 className="font-display text-base font-medium mt-1 leading-snug">{item.name}</h3>
                     <div className="mt-2 flex items-center gap-2">
-                      <span className="font-semibold text-primary text-sm">₹{item.price.toLocaleString('en-IN')}</span>
+                      <span className="font-sans font-bold text-primary text-sm tabular-nums">₹{item.price.toLocaleString('en-IN')}</span>
                       {item.oldPrice && (
-                        <span className="text-xs text-muted line-through">₹{item.oldPrice.toLocaleString('en-IN')}</span>
+                        <span className="font-sans text-xs text-muted line-through tabular-nums">₹{item.oldPrice.toLocaleString('en-IN')}</span>
                       )}
                     </div>
                   </div>

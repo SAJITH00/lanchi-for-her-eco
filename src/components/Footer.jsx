@@ -29,7 +29,7 @@ export default function Footer() {
           {/* SOCIAL MEDIA */}
           <div className="lhf-social">
             <a
-              href="https://www.instagram.com/YOUR_USERNAME/"
+              href="https://www.instagram.com/lanchi.forher?utm_source=ig_web_button_share_sheet&dlrf=ZDNlZDc0MzIxNw=="
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

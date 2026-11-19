@@ -151,75 +151,143 @@ export default function CategoryPage() {
     return list;
   }, [extendedProducts, querySearch, selectedCategory, sortBy]);
 
-  // GSAP: reveal the heading and animate product cards as they enter the viewport.
+  // GSAP: Reversible scroll animations
   useEffect(() => {
     const page = pageRef.current;
+    const grid = gridRef.current;
 
-    if (!page || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return undefined;
+    if (
+      !page ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
     }
 
     const ctx = gsap.context(() => {
+
+      // 1. Heading entrance animation
       gsap.fromTo(
         '.category-intro-animate',
-        { y: 28, autoAlpha: 0 },
+        {
+          y: 35,
+          autoAlpha: 0
+        },
         {
           y: 0,
           autoAlpha: 1,
-          duration: 0.8,
-          stagger: 0.12,
+          duration: 0.9,
+          stagger: 0.15,
           ease: 'power3.out'
         }
       );
 
-      const cards = gridRef.current?.querySelectorAll('.category-product-card');
+      // 2. Product card scroll animations
+      const cards = gsap.utils.toArray(
+        '.category-product-card'
+      );
 
-      if (cards?.length) {
-        gsap.set(cards, {
-          y: 42,
+      cards.forEach((card, index) => {
+
+        const image = card.querySelector(
+          '.category-product-image img'
+        );
+
+        const direction = index % 2 === 0 ? 35 : -35;
+
+        // Initial card position
+        gsap.set(card, {
+          y: 65,
           autoAlpha: 0,
-          scale: 0.97
+          scale: 0.94,
+          rotateX: 4,
+          transformPerspective: 1000,
+          transformOrigin: 'center bottom'
         });
 
-        cards.forEach((card, index) => {
-          gsap.to(card, {
-            y: 0,
-            autoAlpha: 1,
-            scale: 1,
-            duration: 0.75,
-            delay: (index % 4) * 0.07,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 90%',
-              once: true
-            }
+        // Initial image position
+        if (image) {
+          gsap.set(image, {
+            scale: 1.15,
+            y: 15
           });
-        });
-      }
+        }
 
-      const emptyState = page.querySelector('.category-empty-state');
+        // Reversible card animation
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 88%',
+            end: 'bottom 12%',
+            toggleActions: 'play reverse play reverse',
+            // Animation reverses when scrolling upward
+            invalidateOnRefresh: true
+          }
+        });
+
+        tl.to(card, {
+          y: 0,
+          autoAlpha: 1,
+          scale: 1,
+          rotateX: 0,
+          duration: 0.85,
+          ease: 'power3.out',
+          delay: (index % 4) * 0.07
+        });
+
+        if (image) {
+          tl.to(
+            image,
+            {
+              scale: 1,
+              y: 0,
+              duration: 1,
+              ease: 'power2.out'
+            },
+            '<'
+          );
+        }
+
+        // Alternating subtle entrance movement
+        gsap.set(card, {
+          x: direction * 0.15
+        });
+
+      });
+
+      // 3. Empty state animation
+      const emptyState = page.querySelector(
+        '.category-empty-state'
+      );
 
       if (emptyState) {
         gsap.fromTo(
           emptyState,
-          { y: 24, autoAlpha: 0 },
+          {
+            y: 35,
+            autoAlpha: 0,
+            scale: 0.97
+          },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.7,
+            scale: 1,
+            duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: emptyState,
-              start: 'top 90%',
-              once: true
+              start: 'top 88%',
+              toggleActions: 'play reverse play reverse'
             }
           }
         );
       }
+
     }, page);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
+
   }, [filteredList]);
 
   const handleCategoryChange = (categoryId) => {
@@ -341,7 +409,7 @@ export default function CategoryPage() {
               return (
                 <article
                   key={product.id}
-                  className="category-product-card group flex flex-col overflow-hidden rounded-2xl border border-[#EAE1D8] bg-white shadow-[0_5px_22px_rgba(61,42,29,0.045)] transition-[transform,box-shadow,border-color] duration-500 ease-out hover:-translate-y-2 hover:border-[#C6A487] hover:shadow-[0_22px_48px_rgba(61,42,29,0.13)]"
+                  className="category-product-card group flex flex-col overflow-hidden rounded-2xl border border-[#EAE1D8] bg-white shadow-[0_5px_22px_rgba(61,42,29,0.045)] hover:border-[#C6A487]"
                 >
                   {/* Product image */}
                   <div className="category-product-image relative aspect-[3/4] overflow-hidden bg-[#F0EAE4]">
@@ -435,12 +503,12 @@ export default function CategoryPage() {
                     {/* Price and add to cart */}
                     <div className="mt-5 flex items-center justify-between gap-2 border-t border-[#EEE7E0] pt-4">
                       <div className="min-w-0">
-                        <span className="text-sm font-semibold text-[#70452F]">
+                        <span className="font-sans text-sm font-bold text-[#70452F] tabular-nums">
                           ₹{Number(product.price || 0).toLocaleString('en-IN')}
                         </span>
 
                         {product.oldPrice && (
-                          <span className="ml-2 text-[11px] text-[#A99A8D] line-through">
+                          <span className="ml-2 text-[11px] text-[#A99A8D] line-through font-sans tabular-nums">
                             ₹{Number(product.oldPrice).toLocaleString('en-IN')}
                           </span>
                         )}
@@ -471,19 +539,51 @@ export default function CategoryPage() {
           overflow: clip;
         }
 
+        /* Product card animation performance */
         .category-product-card {
           will-change: transform, opacity;
-          transform: translateZ(0);
-        }
-
-        .category-product-image img {
+          transform-style: preserve-3d;
           backface-visibility: hidden;
         }
 
-        .category-quick-view {
-          transition-duration: 400ms;
+        /* Product image smooth reveal */
+        .category-product-image {
+          overflow: hidden;
+          perspective: 1000px;
         }
 
+        .category-product-image img {
+          will-change: transform;
+          backface-visibility: hidden;
+          transform-origin: center center;
+        }
+
+        /* Premium card hover */
+        .category-product-card {
+          transition:
+            box-shadow 0.5s ease,
+            border-color 0.5s ease,
+            transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .category-product-card:hover {
+          box-shadow: 0 25px 55px rgba(61, 42, 29, 0.14);
+        }
+
+        /* Image hover */
+        .category-product-card:hover .category-product-image img {
+          transform: scale(1.07);
+        }
+
+        /* Quick view reveal */
+        .category-quick-view {
+          transition:
+            opacity 0.45s ease,
+            transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+            background 0.3s ease;
+        }
+
+        /* Mobile support */
         @media (hover: none) {
           .category-quick-view {
             opacity: 1;
@@ -491,7 +591,13 @@ export default function CategoryPage() {
           }
         }
 
+        /* Reduced motion accessibility */
         @media (prefers-reduced-motion: reduce) {
+          .category-product-card,
+          .category-product-image img {
+            transition: none !important;
+          }
+
           .category-page *,
           .category-page *::before,
           .category-page *::after {

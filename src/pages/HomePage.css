@@ -11,106 +11,12 @@
 }
 
 /* =========================================
-   SPLASH SCREEN
-========================================= */
-
-.splash-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: #291b15;
-}
-
-.splash-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  will-change: transform;
-}
-
-.splash-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(28, 16, 12, 0.65),
-    rgba(65, 37, 26, 0.35),
-    rgba(20, 12, 9, 0.65)
-  );
-}
-
-.splash-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-  padding: 20px;
-}
-
-.splash-small {
-  font-size: 10px;
-  letter-spacing: 5px;
-  font-weight: 500;
-  margin-bottom: 22px;
-  color: #f0d5bd;
-}
-
-.splash-logo {
-  font-family: Georgia, serif;
-  font-size: clamp(36px, 7vw, 76px);
-  font-weight: 500;
-  letter-spacing: 5px;
-  line-height: 1.1;
-}
-
-.splash-logo span {
-  display: block;
-  font-size: 0.42em;
-  letter-spacing: 12px;
-  margin-top: 12px;
-}
-
-.splash-line {
-  width: 100px;
-  height: 1px;
-  background: #e6c1a4;
-  margin: 28px auto;
-  transform-origin: center;
-}
-
-.splash-caption {
-  color: #f0d5bd;
-  font-family: Georgia, serif;
-  font-size: 15px;
-  font-style: italic;
-  letter-spacing: 1px;
-}
-
-.splash-copyright {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 9px;
-  letter-spacing: 3px;
-}
-
-/* =========================================
    HOME CONTENT
 ========================================= */
 
 .home-content {
-  visibility: hidden;
-  opacity: 0;
+  display: block;
+  width: 100%;
 }
 
 .hero-section {

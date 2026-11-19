@@ -298,7 +298,7 @@ export default function ModelsPage() {
             <img src={currentModel.image} alt={currentModel.dressName} fetchPriority="high" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
             <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-2 text-[9px] font-semibold uppercase tracking-wider text-[#76543A] shadow-sm">{currentModel.modelName}</span>
-            <span className="absolute bottom-4 right-4 rounded-full bg-white/95 px-4 py-2 font-display text-sm font-semibold text-[#8B5037] shadow">{money(currentModel.price)}</span>
+            <span className="absolute bottom-4 right-4 rounded-full bg-white/95 px-4 py-2 font-sans text-sm font-bold text-[#8B5037] shadow tabular-nums">{money(currentModel.price)}</span>
           </div>
 
           <button ref={rightCardRef} type="button" onClick={handleNext} disabled={isAnimating} className="model-card model-side-card group hidden md:block" aria-label={`Next look: ${nextModel.dressName}`}>
@@ -341,9 +341,9 @@ export default function ModelsPage() {
             <p className="mt-5 max-w-lg text-sm leading-7 text-[#796B61]">{currentModel.description}</p>
 
             <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1">
-              <span className="font-display text-3xl font-semibold text-[#8B5037]">{money(currentModel.price)}</span>
-              <span className="text-sm text-[#A79A90] line-through">{money(currentModel.oldPrice)}</span>
-              <span className="rounded-full bg-[#F4E7D8] px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-[#80552F]">{discount}% off</span>
+              <span className="font-sans text-3xl font-bold text-[#8B5037] tabular-nums">{money(currentModel.price)}</span>
+              <span className="font-sans text-sm text-[#A79A90] line-through tabular-nums">{money(currentModel.oldPrice)}</span>
+              <span className="font-sans rounded-full bg-[#F4E7D8] px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-[#80552F] tabular-nums">{discount}% off</span>
             </div>
 
             <div className="my-7 h-px bg-[#EEE7E0]" />

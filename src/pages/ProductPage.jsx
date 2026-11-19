@@ -143,9 +143,9 @@ export default function ProductPage() {
 
           <div className="rounded-xl border border-line bg-cream/50 p-4">
             <div className="flex items-baseline gap-3">
-              <span className="font-display text-3xl font-semibold text-primary">₹{product.price.toLocaleString('en-IN')}</span>
-              <span className="text-base text-muted line-through">₹{product.oldPrice.toLocaleString('en-IN')}</span>
-              <span className="rounded-full bg-secondary-fixed px-2.5 py-0.5 text-xs font-semibold text-[#2A1700]">
+              <span className="font-sans text-3xl font-bold text-primary tabular-nums">₹{product.price.toLocaleString('en-IN')}</span>
+              <span className="font-sans text-base text-muted line-through tabular-nums">₹{product.oldPrice.toLocaleString('en-IN')}</span>
+              <span className="font-sans rounded-full bg-secondary-fixed px-2.5 py-0.5 text-xs font-bold text-[#2A1700] tabular-nums">
                 Save ₹{(product.oldPrice - product.price).toLocaleString('en-IN')} ({product.discount})
               </span>
             </div>

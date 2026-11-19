@@ -150,11 +150,11 @@ export default function CartPage() {
                             <p className="text-xs text-muted mt-0.5">Size: {item.size} • Color: {item.color || 'Standard'}</p>
                           </div>
                           <div className="text-right">
-                            <span className="font-semibold text-primary text-sm">
+                            <span className="font-sans font-bold text-primary text-sm tabular-nums">
                               ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                             </span>
                             {item.oldPrice && (
-                              <span className="block text-xs text-muted line-through">
+                              <span className="block text-xs text-muted line-through font-sans tabular-nums">
                                 ₹{(item.oldPrice * item.quantity).toLocaleString('en-IN')}
                               </span>
                             )}
@@ -272,11 +272,11 @@ export default function CartPage() {
                 <div className="space-y-3 text-xs border-b border-line pb-4 text-umber">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span className="font-semibold text-ink">₹{cartSubtotal.toLocaleString('en-IN')}</span>
+                    <span className="font-sans font-bold text-ink tabular-nums">₹{cartSubtotal.toLocaleString('en-IN')}</span>
                   </div>
                   <div className="flex justify-between text-[#7C5728]">
                     <span>Seasonal Promo ({discountPercent}% off)</span>
-                    <span>-₹{discountAmount.toLocaleString('en-IN')}</span>
+                    <span className="font-sans font-bold tabular-nums">-₹{discountAmount.toLocaleString('en-IN')}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Doorstep Express Delivery</span>
@@ -284,7 +284,7 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between text-muted">
                     <span>GST (Taxes included)</span>
-                    <span>₹0 (Included)</span>
+                    <span className="font-sans tabular-nums">₹0 (Included)</span>
                   </div>
                 </div>
 
@@ -317,7 +317,7 @@ export default function CartPage() {
                     <span className="text-sm font-semibold text-ink">Total Amount</span>
                     <p className="text-[10px] text-muted">All duties &amp; shipping included</p>
                   </div>
-                  <span className="font-display text-2xl font-bold text-primary">
+                  <span className="font-sans text-2xl font-bold text-primary tabular-nums">
                     ₹{cartTotal.toLocaleString('en-IN')}
                   </span>
                 </div>

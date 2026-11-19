@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import splashImage from '../assets/images/mkdlanchi.jpg';
 import './HomePage.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,7 +12,6 @@ export default function HomePage() {
   const { products, addToCart, toggleWishlist, isInWishlist } = useApp();
 
   const homeRef = useRef(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState('All new');
 
   const filterPills = [
@@ -34,51 +32,14 @@ export default function HomePage() {
   // =========================================
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
-      // Initial states
-      gsap.set('.home-content', { autoAlpha: 0 });
-
-      // Splash screen animation
-      const loader = gsap.timeline({
-        onComplete: () => setIsLoading(false)
-      });
-
-      loader
-        .fromTo(
-          '.splash-image',
-          { scale: 1.15 },
-          { scale: 1, duration: 1.5, ease: 'power2.out' }
-        )
-        .fromTo(
-          '.splash-logo',
-          { y: 30, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.9'
-        )
-        .fromTo(
-          '.splash-line',
-          { scaleX: 0 },
-          { scaleX: 1, duration: 0.8, ease: 'power2.inOut' },
-          '-=0.5'
-        )
-        .to('.splash-content', {
-          y: -30,
-          autoAlpha: 0,
-          duration: 0.45
-        })
-        .to('.splash-screen', {
-          yPercent: -100,
-          duration: 1.1,
-          ease: 'power4.inOut'
-        })
-        .to('.home-content', {
-          autoAlpha: 1,
-          duration: 0.5
-        }, '-=0.65');
-
-      // Hero animation
+      // Hero entrance choreography
       const hero = gsap.timeline({
-        delay: 0.2,
+        delay: 0.1,
         defaults: { ease: 'power3.out' }
       });
 
@@ -375,39 +336,6 @@ export default function HomePage() {
 
   return (
     <div ref={homeRef} className="lanchi-home">
-
-      {/* =====================================
-          SPLASH / LOADING SCREEN
-      ====================================== */}
-
-      {isLoading && (
-        <div className="splash-screen">
-          <img
-            src={splashImage}
-            alt="LANCHI FOR HER"
-            className="splash-image"
-          />
-
-          <div className="splash-overlay" />
-
-          <div className="splash-content">
-            <p className="splash-small">THE ART OF MODEST FASHION</p>
-
-            <h1 className="splash-logo">
-              LANCHI <span>FOR HER</span>
-            </h1>
-
-            <div className="splash-line" />
-
-            <p className="splash-caption">Elegance in every detail</p>
-          </div>
-
-          <span className="splash-copyright">
-            LANCHI FOR HER · 2026
-          </span>
-        </div>
-      )}
-
       <main className="home-content">
 
         {/* =====================================
@@ -432,7 +360,7 @@ export default function HomePage() {
               </p>
 
               <div className="hero-buttons mt-8 flex flex-wrap gap-4">
-                <Link to="/product" className="luxury-button rounded-lg bg-primary px-7 py-3.5 text-[13px] font-semibold uppercase tracking-label text-white shadow-sm">
+                <Link to="/category" className="luxury-button rounded-lg bg-primary px-7 py-3.5 text-[13px] font-semibold uppercase tracking-label text-white shadow-sm">
                   Shop collection
                 </Link>
 
@@ -692,11 +620,11 @@ export default function HomePage() {
 
                     <div className="mt-4 flex items-center justify-between border-t border-line pt-4">
                       <p>
-                        <span className="font-semibold text-primary">
+                        <span className="font-sans font-bold text-primary tabular-nums">
                           ₹{product.price.toLocaleString('en-IN')}
                         </span>
                         {' '}
-                        <span className="ml-1 text-xs text-muted line-through">
+                        <span className="ml-1 text-xs text-muted line-through font-sans tabular-nums">
                           ₹{product.oldPrice.toLocaleString('en-IN')}
                         </span>
                       </p>
